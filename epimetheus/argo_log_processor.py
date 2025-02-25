@@ -40,7 +40,7 @@ def tail_file(file_path):
 def main():
     # load the env vars for the log file path
     log_file_path = os.getenv("ARGOCD_LOG_PATH", "/var/log/argocd/argocd.log")
-    logging.innfo(f"Starting log processor. Tailing file: {log_file_path}")
+    logging.info(f"Starting log processor. Tailing file: {log_file_path}")
 
     # initialize a text-generation pipeline with GPT-2 as a placeholder
     generator = pipeline('text-generation', model='gpt-2')
