@@ -1,0 +1,32 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-gpt-model
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: argocd-gpt-model
+  template:
+    metadata:
+      labels:
+        app: argocd-gpt-model
+    spec:
+      containers:
+      - name: argocd-gpt-model
+        image: <my-docker-image>  # replace with my built image name, e.g., gcr.io/my-project/argocd-gpt-model:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: argocd-gpt-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: argocd-gpt-model
