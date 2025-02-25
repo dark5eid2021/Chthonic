@@ -1,6 +1,13 @@
 import torch
 from transformers import GPT2Tokenizer, GPT2LMHeadModel, TextDataset, DataCollatorForLanguageModeling, Trainer, TrainingArguments
 
+"""
+This is a working draft of how to build a GPT-like transformer to work with ArgoCD logs. We assume
+that you want to fine-tune a pre-trained GPT model on your ArgoCD logs and expose it as an API via
+FastAPI
+"""
+
+
 def fine_tune_model():
     # load tokenizer annd model
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
