@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-with-log-processor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: argocd
+  template:
+    metadata:
+      labels:
+        app: argocd
+    spec:
+      containers:
+      - name: argocd
+        image: argoproj/argocd:v2.0.0
+        volumeMounts:
+          - name: argocd-logs
+            mountPath: /var/log/argocd
+      - name: log-processor
+        image: my-docker-repo/argo-log-processor:latest
+        env:
+          - name: ARGOCD_LOG_PATH
+            value: /var/log/argocd/argocd.log
+        volumeMounts:
+          - name: argocd-logs
+            mountPath: /var/log/argocd
+      volumes:
+      - name: argocd-logs
+        emptyDir: {}
+
+
+# this deployment creates a pod with 2 containers: 1 running ArgoCD and the other running the log processor
+# both containers share an EmptyDir volume mounted as /var/log/argocd
+# ensure that Argo writes logs to that location or adjust the paths as needed
+# the env var ARGOCD_LOG_PATH directs the log processor to the correct file
+
+# Production Considerations: Monitor resource usage (especially when running transformers) 
+# and adjust CPU/GPU requests/limits in your pod spec accordingly.
+
+# to be clear - this integrates as a sidecar in GKE

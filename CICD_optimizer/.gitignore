@@ -1,0 +1,38 @@
+# Binaries
+*.exe
+*.dll
+*.so
+*.dylib
+*.out
+*.a
+*.o
+
+# Go build artifacts
+bin/
+pkg/
+*.test
+
+# Go modules and dependencies
+vendor/
+go.sum
+go.work.sum
+
+# VS Code settings and workspace files
+.vscode/
+.history/
+
+# Environment files
+.env
+.env.local
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+
+# Coverage and profiling data
+coverage.out
+profile.out
+*.cov
