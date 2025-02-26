@@ -77,3 +77,28 @@ if __name__ == "__main__":
     # Forward pass.
     logits = model(dummy_input)
     print("Logits shape:", logits.shape)  # Expected: (2, max_seq_len, vocab_size)
+
+"""
+Hyperparameters
+vocab_size: The number of unique tokens in your ArgoCD logs (e.g., 6000).
+embed_dim: The dimension of the token embeddings (e.g., 256).
+num_layers: The number of transformer blocks to stack (e.g., 6).
+num_heads: The number of attention heads in each transformer block (e.g., 8).
+max_seq_len: The maximum sequence length for the log data (e.g., 512).
+dropout: The dropout probability used in transformer blocks (default: 0.1).
+
+The repository includes two primary classes:
+
+GPTBlock:
+    A single transformer block that applies:
+       - Layer Normalization
+       - Multi-Head Self-Attention
+       - Feed-Forward Neural Network
+       - Residual Connections
+GPTArgoModel:
+    The overall model, which stacks multiple GPTBlock layers and includes:
+        - Token Embedding: Converts token indices into dense vectors.
+        - Positional Embedding: Adds positional information to the token embeddings.
+        - Final Layer Normalization and Linear Projection: Maps the transformer outputs 
+            to logits corresponding to the vocabulary size.
+"""
