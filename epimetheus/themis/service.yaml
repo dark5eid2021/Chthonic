@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gpt-argocd-model-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: gpt-argocd-model
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
